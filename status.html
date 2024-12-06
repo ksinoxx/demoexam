@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Статистика</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Заявки</a>
+    <a href="status.html">Статистика</a>
+    <a href="update.html">Редактирование заявки</a>
+
+    Количество выполненных заявок:
+        <span id="complite_count"></span>
+    Среднее время выполнения заявки:
+        <span id="average_time_to_complite"></span>
+<h2>Статистика по типам неисправностей</h2>
+<table>
+    <thead>
+        <th>Тип неисправности:</th>
+        <th>Количество:</th>
+    </thead>
+</table>
+</body>
+<script>
+    let complite_count = document.getElementById("complite_count");
+    let average_time_to_complite = document.getElementById("average_time_to_complite");
+    let stat_table = document.getElementById("tbody")
+
+    getstatistics();
+
+    async function getstatistics() {
+        let date = await fetch("https://localhost:7280/statistics");
+        let statistic = await date.json();
+
+        complite_count.append(statistic.complite_count);
+        average_time_to_complite.append(statistic.average_time_to_complite);
+
+        for (var key of Object.keys(statistic.problem_type_statistic)) {
+            let tr = document.createElement("tr");
+            tr.innerHTML = `
+            <td>${key}</td>
+            <td>${stat.problem_type_statistic[key]}</td>`;
+
+            stat_table.append(tr);
+        }
+    }
+</script>
+</html>

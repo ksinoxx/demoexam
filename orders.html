@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заявки</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Заявки</a>
+    <a href="status.html">Статистика</a>
+    <a href="update.html">Редактирование заявки</a> 
+    <div>
+        <input id="search" placeholder="Номер" />
+        <button onclick="GetFilter()">Найти</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Дата добавление</th>
+                <th>Вид оргтехники</th>
+                <th>Модель</th>
+                <th>Описание проблемы</th>
+                <th>Фио клиента</th>
+                <th>Статус</th>
+                <th>Мастер</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+<script>
+    let tbody = document.querySelector("tbody")
+
+    GetOrders()
+
+    async function GetOrders(param = null) {
+        let url = param?
+        `https://localhost:7280/?param=${param}` :
+        "https://localhost:7280/";
+        
+    let response = await fetch(url).then(date => date.json())
+    
+    response.repo.forEach(o => {
+        let tr = document.createElement("tr")
+
+        tr.innerHTML = `
+            <td>${o.number}</td>
+            <td>${o.startDate}</td>
+            <td>${o.typeEquipmet}</td>
+            <td>${o.model}</td>
+            <td>${o.descProblem}</td>
+            <td>${o.fIO}</td>
+            <td>${o.numbPhone}</td>
+            <td>${o.status}</td>
+            <td>${o.master}</td>
+        `;
+        tbody.append(tr);
+    });
+
+    function GetFilter() {
+        tbody.innerHTML = ""
+        let param = document.getElementById("search").value;
+        GetOrders(param)
+    }
+
+    }
+</script>
+</html>

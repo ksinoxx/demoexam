@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование заявки</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Заявки</a>
+    <a href="status.html">Статистика</a>
+    <a href="update.html">Редактирование заявки</a>
+
+    <iframe name="iframe" style="display: none;"></iframe>
+    <form target="iframe" action="https://localhost:7280/update" method="put">
+        <input required placeholder="Номер" type="number" name="number" />
+        <input placeholder="Описание проблемы" type="text" name="descProblem" />
+        <input placeholder="Мастер" type="text" name="master" />
+        <label for="status">Статус</label><br/>
+    <select name="status">
+        <option>Готова к выдаче</option>
+        <option>В процессе ремонта</option>
+        <option>Завершена</option>
+    </select>
+    <input type="submit" value="Обновление" />
+    </form>
+</body>
+</html>

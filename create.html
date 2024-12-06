@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание заявки</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Заявки</a>
+    <a href="status.html">Статистика</a>
+    <a href="update.html">Редактирование заявки</a>
+
+<iframe name="iframe" style="display: none;"></iframe>
+<form target="iframe" action="https://localhost:7280/create" method="get">
+    <input required placeholder="Номер" type="number" name="number" /><br/>
+    <label for="startDate">Дата начала</label><br/>
+    <input required type="date" name="startDate" /><br/>
+    <input required placeholder="Вид оргтехники" type="text" name="typeEquipmet" /><br/>
+    <input required placeholder="Модель" type="text" name="model" /><br/>
+    <input required placeholder="Описание проблемы" type="text" name="descProblem" /><br/>
+    <input required placeholder="Фио клиента" type="text" name="fIO" /><br/>
+    <input required placeholder="Номер телефона" type="text" name="numbPhone" /><br/>
+    <label for="status">Статус</label><br/>
+    <select name="status">
+        <option>Новая заявка</option>
+        <option>В процессе ремонта</option>
+        <option>Завершена</option>
+    </select><br/>
+    <input type="submit" name="Создание" />
+</form>
+</body>
+</html>
